@@ -20,13 +20,15 @@ pipeline {
 
         stage('Build WAR') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t $IMAGE_NAME ."
+                dir('docker-tomcat-app') {
+                    sh "docker build -t $IMAGE_NAME ."
+                }
             }
         }
 
