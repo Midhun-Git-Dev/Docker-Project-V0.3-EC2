@@ -24,6 +24,17 @@ pipeline {
             }
         }
 
+        stage('Prepare WAR for Docker') {
+            steps {
+                sh '''
+                echo "Preparing WAR for Docker build..."
+                rm -rf docker-tomcat-app/webapp || true
+                mkdir -p docker-tomcat-app/webapp/target
+                cp webapp/target/*.war docker-tomcat-app/webapp/target/
+                '''
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 dir('docker-tomcat-app') {
