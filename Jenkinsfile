@@ -26,8 +26,8 @@ pipeline {
         stage('Build WAR (Low Memory Mode)') {
             steps {
                 sh '''
-                echo "Building WAR with low memory usage..."
-                mvn clean package -DskipTests -T 1C
+                echo "Building WAR..."
+                mvn clean package -DskipTests
                 '''
             }
         }
@@ -44,27 +44,25 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image (Low Load)') {
+        stage('Build Docker Image') {
             steps {
                 dir('docker-tomcat-app') {
                     sh '''
-                    echo "Building Docker image with low resource usage..."
-                    DOCKER_BUILDKIT=1 docker build -t $IMAGE_NAME .
+                    echo "Building Docker image..."
+                    docker build -t $IMAGE_NAME .
                     '''
                 }
             }
         }
 
-        stage('Run Docker Container (Memory Limited)') {
+        stage('Run Docker Container') {
             steps {
                 sh '''
-                echo "Stopping old container..."
+                echo "Restarting container..."
                 docker stop $CONTAINER_NAME || true
                 docker rm $CONTAINER_NAME || true
 
-                echo "Running container with memory limit..."
                 docker run -d -m 300m -p 8085:8080 --name $CONTAINER_NAME $IMAGE_NAME
-
                 docker ps
                 '''
             }
@@ -73,7 +71,6 @@ pipeline {
 
     post {
         always {
-            echo "Cleaning workspace to save disk space..."
             cleanWs()
         }
     }
