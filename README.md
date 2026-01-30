@@ -1,184 +1,105 @@
-🚀 Docker-Based CI/CD Pipeline with Jenkins, SonarQube & AWS EC2
-📌 Project Title
+## Project Overview
+
+**End-to-End DevOps CI/CD Pipeline** for a Dockerized JSP-based web application using **Jenkins**, **SonarQube**, **Docker**, and **AWS EC2**.
+
+This project demonstrates a complete, automated, production-like deployment workflow — from code commit to live public application.
+
+## Problem Statement
+
+Manual builds, testing, and deployments are error-prone, slow, and inconsistent.  
+Modern teams need **automated pipelines** that enforce quality, ensure security, and enable fast, reliable releases.
+
+This project delivers a **fully automated CI/CD pipeline** with code quality gates, containerization, and cloud hosting.
+
+## Objectives
+
+- Automate build, test, quality analysis, and deployment
+- Enforce code quality using SonarQube
+- Containerize the application with Docker
+- Deploy and serve the app on AWS EC2
+- Simulate a real-world production DevOps pipeline
+
+## Tech Stack
+
+| Category              | Tools & Technologies                  |
+|-----------------------|---------------------------------------|
+| Version Control       | Git, GitHub                           |
+| CI/CD                 | Jenkins                               |
+| Build Tool            | Maven                                 |
+| Code Quality          | SonarQube                             |
+| Containerization      | Docker                                |
+| Cloud Provider        | AWS EC2                               |
+| Web Server            | Apache Tomcat                         |
+| OS                    | Ubuntu Linux                          |
+| Application           | JSP, HTML5, CSS3, JavaScript          |
+| Scripting             | Shell (Bash)                          |
+
+## Architecture & Workflow
+
+1. Developer pushes code to **GitHub**
+2. **Jenkins** detects commit → triggers pipeline
+3. **Maven** builds the WAR file
+4. **SonarQube** performs static code analysis + quality gate
+5. **Docker** builds production-ready image
+6. Docker container is deployed to **AWS EC2**
+7. Application served publicly via Tomcat
+
+**Pipeline Stages**:
+- Checkout
+- Maven Build
+- SonarQube Scan
+- Quality Gate
+- Docker Build & Push
+- Deploy to EC2
+
+## Key Features of the Application
+
+- Sticky navbar with search, cart & auth
+- Hero banner with promotional overlay
+- Scrollable category section
+- Modern product cards (hover effects, discounts, ratings, add-to-cart)
+- Deals of the Day with countdown timer
+- Responsive design (mobile/tablet/desktop)
+- Clean footer with links & social icons
+- JSP structure ready for backend integration
+
+## Deployment Strategy
+
+- WAR packaged into Tomcat-based Docker image
+- Container runs on AWS EC2 (public port 8085 → 8080)
+- Supports rolling updates via container restart
+- Security Groups restrict access
+- No hardcoded secrets
+
+## Challenges & Solutions
+
+| Challenge                     | Solution                                      |
+|-------------------------------|-----------------------------------------------|
+| Jenkins performance issues    | Upgraded EC2 instance type                    |
+| SonarQube connection failures | Correct server URL + webhook configuration    |
+| Quality gate timeouts         | Increased timeout & optimized scan rules      |
+| Docker port conflicts         | Automated container stop/remove in pipeline   |
+| Pipeline instability          | Added retry logic, detailed logging           |
+
+## Results & Impact
+
+- **Fully automated** production-grade pipeline
+- Deployment time reduced significantly
+- Zero manual errors
+- Enforced code quality & security
+- Live, scalable app on AWS
+- Real-world DevOps simulation for portfolio
+
+## Future Enhancements
+
+- Kubernetes orchestration
+- Terraform IaC
+- Trivy / Snyk security scanning
+- Notification integrations (Slack/Teams)
+- Multi-stage environments (Dev/Staging/Prod)
+- Auto-scaling & ALB
+- Prometheus + Grafana monitoring
 
-End-to-End DevOps CI/CD Pipeline for Dockerized Web Application using Jenkins, SonarQube & AWS EC2
+## Live Demo
 
-🧩 Problem Statement
-
-Modern software teams need automated, reliable, and scalable deployment pipelines to ensure faster releases while maintaining code quality, security, and deployment consistency.
-Manual builds, testing, and deployments increase the risk of errors, slow down delivery, and reduce software reliability.
-
-This project solves these challenges by implementing a fully automated CI/CD pipeline that ensures continuous integration, automated quality analysis, containerized deployment, and live production hosting.
-
-🎯 Project Objective
-
-Automate the build, test, and deployment process
-
-Enforce code quality standards using SonarQube
-
-Build and deploy applications using Docker containers
-
-Host and manage deployment on AWS EC2
-
-Implement a real-world DevOps production pipeline
-
-Improve deployment speed, reliability, and scalability
-
-🛠 Tools & Technologies Used
-Category	Tools
-Version Control	Git, GitHub
-CI/CD Automation	Jenkins
-Build Tool	Maven
-Code Quality	SonarQube
-Containerization	Docker
-Cloud Hosting	AWS EC2
-Web Server	Apache Tomcat
-OS	Ubuntu Linux
-Scripting	Shell (Bash)
-🏗 System Architecture
-
-Workflow Overview:
-
-Developer → GitHub → Jenkins Pipeline → Maven Build → SonarQube Scan  
-→ Docker Image Build → Docker Container Deployment → AWS EC2 Live App
-
-Architecture Flow:
-
-Source code pushed to GitHub
-
-Jenkins triggers automated pipeline
-
-Maven builds application
-
-SonarQube scans code quality
-
-Docker builds container image
-
-Container deployed to EC2
-
-Live application served to users
-
-🔄 CI/CD Pipeline Flow
-Pipeline Stages:
-
-Source Code Checkout
-
-Build Application (Maven)
-
-Static Code Analysis (SonarQube)
-
-Quality Gate Validation
-
-Docker Image Build
-
-Docker Container Deployment
-
-Live Application Hosting on AWS EC2
-
-Automation Benefits:
-
-Zero manual deployment
-
-Faster release cycles
-
-Reduced errors
-
-Improved quality enforcement
-
-🚀 Deployment Strategy
-
-Application packaged into a WAR file
-
-Docker image built using Tomcat base image
-
-Container deployed on AWS EC2
-
-Port mapping ensures public access to the application
-
-Rolling updates enabled via container redeployment
-
-Deployment Model:
-
-Blue-Green / Rolling Container Deployment
-
-🔐 Security & Best Practices
-
-Secure Jenkins credentials using Credential Manager
-
-SonarQube enforces secure coding standards
-
-Docker containers ensure environment isolation
-
-AWS Security Groups restrict authorized access only
-
-GitHub repository access controlled
-
-No secrets hardcoded in pipeline scripts
-
-Automated quality gate prevents vulnerable code deployment
-
-⚔ Challenges & Solutions
-Challenge	Solution
-Jenkins performance limits	Upgraded EC2 instance
-SonarQube connection failures	Configured correct server URL & webhook
-Quality Gate delays	Increased timeout & optimized scan
-Docker port conflicts	Proper container cleanup automation
-Pipeline failures	Implemented robust retry & logging
-📊 Impact, Results & Outcomes
-✅ Achievements:
-
-Fully automated production-grade CI/CD pipeline
-
-Improved deployment speed by 80%
-
-Eliminated manual deployment errors
-
-Enforced code quality & security compliance
-
-Live scalable deployment on AWS
-
-📈 Business Impact:
-
-Faster releases
-
-Higher reliability
-
-Improved software quality
-
-Real-world DevOps production simulation
-
-🔮 Future Scope & Enhancements
-
-Kubernetes-based container orchestration
-
-Infrastructure as Code using Terraform
-
-Automated security scanning (Snyk / Trivy)
-
-Slack / Teams pipeline notifications
-
-Multi-environment deployment (Dev / Stage / Prod)
-
-Auto-scaling & load balancing
-
-Monitoring using Prometheus & Grafana
-
-🏆 Key Learning Outcomes
-
-Real-world DevOps CI/CD workflow
-
-Jenkins pipeline automation
-
-SonarQube integration
-
-Docker container lifecycle
-
-Cloud deployment on AWS
-
-Debugging production failures
-
-Performance optimization
-
-📎 Project Demo
-
-🌐 Live Application: http://54.226.230.216:8085/
+🌐 **Live Application**: [http://54.226.230.216:8085/](http://54.226.230.216:8085/)
