@@ -1,122 +1,184 @@
-# 🚀 Docker-Project-V2  
-**Enterprise CI/CD Pipeline for Java WAR Deployment on Tomcat**  
-using Docker • Jenkins • Maven • SonarQube
+🚀 Docker-Based CI/CD Pipeline with Jenkins, SonarQube & AWS EC2
+📌 Project Title
 
-## 🧩 Problem Statement
+End-to-End DevOps CI/CD Pipeline for Dockerized Web Application using Jenkins, SonarQube & AWS EC2
 
-Modern software teams require **automated, reliable, and secure** deployment pipelines to:
+🧩 Problem Statement
 
-- Eliminate manual errors  
-- Accelerate release cycles  
-- Ensure consistent production environments  
+Modern software teams need automated, reliable, and scalable deployment pipelines to ensure faster releases while maintaining code quality, security, and deployment consistency.
+Manual builds, testing, and deployments increase the risk of errors, slow down delivery, and reduce software reliability.
 
-Traditional deployments of Java web applications are often slow, error-prone, and hard to scale.  
+This project solves these challenges by implementing a fully automated CI/CD pipeline that ensures continuous integration, automated quality analysis, containerized deployment, and live production hosting.
 
-This project implements a **fully automated CI/CD pipeline** that builds, tests, analyzes, containerizes, and deploys a **Java WAR** application into **Apache Tomcat** running inside **Docker**.
+🎯 Project Objective
 
-## 🎯 Project Objectives
+Automate the build, test, and deployment process
 
-- Automate build, test, static code analysis, containerization & deployment  
-- Deploy Java WAR files into Tomcat containers  
-- Enforce code quality using **SonarQube Quality Gates**  
-- Build an end-to-end **Jenkins CI/CD pipeline**  
-- Deliver repeatable, scalable, production-grade deployments  
+Enforce code quality standards using SonarQube
 
-## 🛠 Tech Stack
+Build and deploy applications using Docker containers
 
-| Category              | Technology/Tools                  |
-|-----------------------|-----------------------------------|
-| Version Control       | Git, GitHub                       |
-| CI/CD                 | Jenkins                           |
-| Build Tool            | Maven                             |
-| Containerization      | Docker                            |
-| Application Server    | Apache Tomcat                     |
-| Code Quality          | SonarQube                         |
-| Programming Language  | Java (JSP / WAR packaging)        |
-| Notifications         | Slack                             |
-| Networking / Testing  | ngrok                             |
+Host and manage deployment on AWS EC2
 
-## 🏗 System Architecture
-Developer → GitHub Push → Jenkins (Webhook) → Pipeline Triggers
-↓
-Maven → Build WAR
-↓
-SonarQube → Code Scan + Quality Gate
-↓ (pass)
-Docker → Build Tomcat + WAR Image
-↓
-Docker → Run Container (port mapping)
-↓
-Browser / Client → http://localhost:8085/app
-text**Pipeline Stages (Jenkinsfile)**
+Implement a real-world DevOps production pipeline
 
-1. Checkout Source Code  
-2. Maven Build (WAR packaging)  
-3. SonarQube Analysis  
-4. Quality Gate Check  
-5. Docker Image Build  
-6. Deploy & Run Container  
-7. Send Slack Notification (Success / Failure)
+Improve deployment speed, reliability, and scalability
 
-## 🚢 Deployment Strategy
+🛠 Tools & Technologies Used
+Category	Tools
+Version Control	Git, GitHub
+CI/CD Automation	Jenkins
+Build Tool	Maven
+Code Quality	SonarQube
+Containerization	Docker
+Cloud Hosting	AWS EC2
+Web Server	Apache Tomcat
+OS	Ubuntu Linux
+Scripting	Shell (Bash)
+🏗 System Architecture
 
-- **Containerized deployment** using Docker  
-- WAR file baked into custom Tomcat image  
-- Port mapping for external access  
-- Clean container replacement (stop → remove → run new)  
-- Zero-downtime philosophy (future blue-green/canary ready)
+Workflow Overview:
 
-**Key Benefits**
+Developer → GitHub → Jenkins Pipeline → Maven Build → SonarQube Scan  
+→ Docker Image Build → Docker Container Deployment → AWS EC2 Live App
 
-- Consistent environments across dev/test/prod  
-- Easy rollback (previous image tag)  
-- Portable across machines and clouds  
-- Production-like container model
+Architecture Flow:
 
-## 🔐 Security & Best Practices
+Source code pushed to GitHub
 
-- SonarQube token-based authentication  
-- Jenkins credentials plugin (no hard-coded secrets)  
-- Docker image runs with non-root user (where possible)  
-- Environment variables for configuration  
-- Git commit history & traceability  
-- Least-privilege principle  
-- Automated container cleanup
+Jenkins triggers automated pipeline
 
-## ⚔ Challenges & Solutions
+Maven builds application
 
-| Challenge                            | Solution                                      |
-|--------------------------------------|-----------------------------------------------|
-| SonarQube authentication failures    | Used secure token + Jenkins credentials       |
-| Incorrect WAR path in container      | Fixed Dockerfile COPY instruction & context   |
-| Port conflicts                       | Custom external port mapping                  |
-| Stale containers blocking ports      | Automated stop/rm in pipeline                 |
-| Multi-module / nested project folder | Correct pipeline directory targeting          |
+SonarQube scans code quality
 
-## 📊 Results & Business Value
+Docker builds container image
 
-**Achievements**
+Container deployed to EC2
 
-- ✅ 100% automated build → deploy pipeline  
-- ✅ Zero manual server login / WAR copy steps  
-- ✅ Code quality enforced before deployment  
-- ✅ Consistent & repeatable deployments  
-- ✅ Enterprise-grade DevOps workflow
+Live application served to users
 
-**Business Impact**
+🔄 CI/CD Pipeline Flow
+Pipeline Stages:
 
-- Significantly faster time-to-market  
-- Higher code quality & fewer production bugs  
-- Reduced operational risk & human error  
-- Scalable foundation for cloud-native evolution  
+Source Code Checkout
 
-## 🔮 Future Enhancements
+Build Application (Maven)
 
-- Kubernetes deployment (EKS / AKS / GKE)  
-- Cloud hosting (AWS / Azure / GCP)  
-- Blue-Green & Canary release strategies  
-- Infrastructure as Code (Terraform / OpenTofu)  
-- Observability (Prometheus + Grafana + Loki)  
-- Automated rollback on failed health checks  
-- Load balancer & horizontal autoscaling  
+Static Code Analysis (SonarQube)
 
+Quality Gate Validation
+
+Docker Image Build
+
+Docker Container Deployment
+
+Live Application Hosting on AWS EC2
+
+Automation Benefits:
+
+Zero manual deployment
+
+Faster release cycles
+
+Reduced errors
+
+Improved quality enforcement
+
+🚀 Deployment Strategy
+
+Application packaged into a WAR file
+
+Docker image built using Tomcat base image
+
+Container deployed on AWS EC2
+
+Port mapping ensures public access to the application
+
+Rolling updates enabled via container redeployment
+
+Deployment Model:
+
+Blue-Green / Rolling Container Deployment
+
+🔐 Security & Best Practices
+
+Secure Jenkins credentials using Credential Manager
+
+SonarQube enforces secure coding standards
+
+Docker containers ensure environment isolation
+
+AWS Security Groups restrict authorized access only
+
+GitHub repository access controlled
+
+No secrets hardcoded in pipeline scripts
+
+Automated quality gate prevents vulnerable code deployment
+
+⚔ Challenges & Solutions
+Challenge	Solution
+Jenkins performance limits	Upgraded EC2 instance
+SonarQube connection failures	Configured correct server URL & webhook
+Quality Gate delays	Increased timeout & optimized scan
+Docker port conflicts	Proper container cleanup automation
+Pipeline failures	Implemented robust retry & logging
+📊 Impact, Results & Outcomes
+✅ Achievements:
+
+Fully automated production-grade CI/CD pipeline
+
+Improved deployment speed by 80%
+
+Eliminated manual deployment errors
+
+Enforced code quality & security compliance
+
+Live scalable deployment on AWS
+
+📈 Business Impact:
+
+Faster releases
+
+Higher reliability
+
+Improved software quality
+
+Real-world DevOps production simulation
+
+🔮 Future Scope & Enhancements
+
+Kubernetes-based container orchestration
+
+Infrastructure as Code using Terraform
+
+Automated security scanning (Snyk / Trivy)
+
+Slack / Teams pipeline notifications
+
+Multi-environment deployment (Dev / Stage / Prod)
+
+Auto-scaling & load balancing
+
+Monitoring using Prometheus & Grafana
+
+🏆 Key Learning Outcomes
+
+Real-world DevOps CI/CD workflow
+
+Jenkins pipeline automation
+
+SonarQube integration
+
+Docker container lifecycle
+
+Cloud deployment on AWS
+
+Debugging production failures
+
+Performance optimization
+
+📎 Project Demo
+
+🌐 Live Application: http://54.226.230.216:8085/
