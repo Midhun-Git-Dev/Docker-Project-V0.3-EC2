@@ -8,7 +8,7 @@ pipeline {
     environment {
         IMAGE_NAME = 'midhun-tomcat-project'
         CONTAINER_NAME = 'midhun-tomcat-container'
-        SONARQUBE_SERVER = 'Docker-EC2-CI-CD'
+        SONARQUBE_SERVER = 'sonarqube-server'
     }
 
     stages {
